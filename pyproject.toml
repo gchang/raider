@@ -1,0 +1,96 @@
+[build-system]
+requires =[
+    "setuptools>=61.0",
+    "setuptools_scm[toml]>=6.2",
+    "wheel",
+    "numpy",
+    "cython",
+    "pybind11>=2.5.0"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "RAiDER"
+authors = [
+    {name="David Bekaert", email="david.bekaert@jpl.nasa.gov"},
+    {name="Jeremy Maurer", email="maurer.jeremy@gmail.com"},
+    {name="Piyush Agram", email="piyush@descarteslabs.com"},
+   {name="Simran Sangha", email="simran.s.sangha@jpl.nasa.gov"},
+   {name="Brett Buzzanga", email="buzzanga@jpl.nasa.gov"},
+]
+description = "Raytracing Atmospheric Delay Estimation for RADAR"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "Apache License 2.0"}
+classifiers=[
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: Apache Software License",
+        "Natural Language :: English",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+]
+# dependencies = []
+dynamic = ["version"]
+
+[project.urls]
+homepage = "https://github.com/dbekaert/RAiDER"
+documentation = "https://github.com/dbekaert/RAiDER-docs"
+repository = "https://github.com/dbekaert/RAiDER"
+"Bug Tracker" = "https://github.com/dbekaert/RAiDER/issues"
+
+[project.scripts]
+"raider.py"             = "RAiDER.cli.__main__:main"
+"calcDelays.py"         = "RAiDER.cli.raider:calcDelays"
+"calcDelaysGUNW.py"     = "RAiDER.cli.raider:calcDelaysGUNW"
+"raiderDownloadGNSS.py" = "RAiDER.cli.raider:downloadGNSS"
+"downloadGNSS.py"       = "RAiDER.cli.raider:downloadGNSS"
+"raiderStats.py"        = "RAiDER.cli.statsPlot:main"
+"generateGACOSVRT.py"   = "RAiDER.models.generateGACOSVRT:main"
+"raiderCombine.py"      = "RAiDER.cli.raider:combineZTDFiles"
+
+[tool.setuptools]
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.packages.find]
+where = ["tools"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yml", "*.yaml", "*.zip"]
+
+[tool.isort]
+known_first_party = "RAiDER"
+multi_line_output = 5
+default_section = "THIRDPARTY"
+
+[tool.setuptools_scm]
+
+[tool.ruff]
+line-length = 120
+src = ["tools", "test"]
+
+[tool.ruff.format]
+indent-style = "space"
+quote-style = "single"
+
+[tool.ruff.lint]
+extend-select = [
+    "I",      # isort: https://docs.astral.sh/ruff/rules/#isort-i
+    "UP",     # pyupgrade: https://docs.astral.sh/ruff/rules/#pyupgrade-up
+    "D",      # pydocstyle: https://docs.astral.sh/ruff/rules/#pydocstyle-d
+    "ANN",    # annotations: https://docs.astral.sh/ruff/rules/#flake8-annotations-ann
+    "PTH",    # use-pathlib-pth: https://docs.astral.sh/ruff/rules/#flake8-use-pathlib-pth
+    "NPY201"  # https://docs.astral.sh/ruff/rules/numpy2-deprecation/#numpy2-deprecation-npy201
+]
+ignore = ["ANN101", "D200", "D205", "D212"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.isort]
+case-sensitive = true
+lines-after-imports = 2
