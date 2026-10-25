@@ -44,8 +44,8 @@ repository = "https://github.com/dbekaert/RAiDER"
 
 [project.scripts]
 "raider.py"             = "RAiDER.cli.__main__:main"
-"calcDelays.py"         = "RAiDER.cli.raider:calcDelays"
-"calcDelaysGUNW.py"     = "RAiDER.cli.raider:calcDelaysGUNW"
+"calcDelays.py"         = "RAiDER.cli.raider:calcDelays_cli"
+"calcDelaysGUNW.py"     = "RAiDER.cli.raider:calcDelaysGUNW_cli"
 "raiderDownloadGNSS.py" = "RAiDER.cli.raider:downloadGNSS"
 "downloadGNSS.py"       = "RAiDER.cli.raider:downloadGNSS"
 "raiderStats.py"        = "RAiDER.cli.statsPlot:main"

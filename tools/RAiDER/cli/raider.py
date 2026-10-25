@@ -686,6 +686,19 @@ def calcDelaysGUNW(iargs: Optional[list[str]] = None) -> Optional[xr.Dataset]:
     return ds
 
 
+# Console-script entry points. A console script passes the function's return
+# value to sys.exit(), which treats anything other than None or an int as an
+# error message and exits with status 1. calcDelays and calcDelaysGUNW return
+# their outputs for use from Python, so the scripts call these wrappers, which
+# return None. Errors still raise and exit non-zero.
+def calcDelays_cli() -> None:
+    calcDelays()
+
+
+def calcDelaysGUNW_cli() -> None:
+    calcDelaysGUNW()
+
+
 # ------------------------------------------------------------ processDelays.py
 def combineZTDFiles() -> None:
     """Command-line program to process delay files from RAiDER and GNSS into a single file."""
